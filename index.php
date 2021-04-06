@@ -4,7 +4,7 @@
     $uri = explode('/', $uri);
 	$control = '';
 	if(isset($uri[0]) && $uri[0] !== '') {
-		$control = $uri[0];
+		$control = ucfirst($uri[0]);
 	
 		if (file_exists("Controllers/$control.php")) {
 			require "Controllers/".$control.".php";
