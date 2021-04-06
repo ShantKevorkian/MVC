@@ -23,8 +23,8 @@
 				} 
 				else {
 					// If uri[1] is empty call the index method in the class if it exists
-					if (method_exists($$control_obj, "index")) {
-						$$control_obj->index();
+					if (method_exists($control_obj, "index")) {
+						$control_obj->index();
 					} 
 					else {
 						echo "The method index() does not exist in the class '$uri[0]'";
