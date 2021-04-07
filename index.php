@@ -5,9 +5,11 @@
 	
 		if (file_exists("Controllers/$control.php")) {
 			require "Controllers/".$control.".php";
+
 			if (class_exists($control)) {
 				$class_name = $control;
 				$control_obj = new $class_name;
+				
 				if (!empty($uri[1])) {
 					$method = $uri[1];
 					if (method_exists($control_obj, $method)) {
