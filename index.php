@@ -3,7 +3,7 @@
 	if(!empty($uri[0])) {
 		$control = ucfirst($uri[0]);
 	
-		if (file_exists("Controllers/$control.php")) {
+		if (file_exists("Controllers/".$control.".php")) {
 			require "Controllers/".$control.".php";
 
 			if (class_exists($control)) {
