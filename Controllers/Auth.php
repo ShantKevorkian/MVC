@@ -1,4 +1,5 @@
 <?php
+    namespace Controllers;
     class Auth {
         public function test() {
             echo "test";

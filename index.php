@@ -1,11 +1,15 @@
 <?php
+	use Controllers\Auth;
+
     $uri = explode('/', ltrim($_SERVER['REQUEST_URI'], '/'));
 	if(!empty($uri[0])) {
 		$control = ucfirst($uri[0]);
 	
 		if (file_exists("Controllers/".$control.".php")) {
-			require "Controllers/".$control.".php";
-
+			spl_autoload_register(function($class_name){
+				include (str_replace("\\", "/", $class_name).".php");
+			});
+			$control = "Controllers\\".$control;
 			if (class_exists($control)) {
 				$class_name = $control;
 				$control_obj = new $class_name;
