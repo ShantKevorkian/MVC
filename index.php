@@ -1,9 +1,6 @@
 <?php
-	$uri = $_SERVER['REQUEST_URI'];
-    $uri = ltrim($uri, '/');
-    $uri = explode('/', $uri);
-	$control = '';
-	if(isset($uri[0]) && $uri[0] !== '') {
+    $uri = explode('/', ltrim($_SERVER['REQUEST_URI'], '/'));
+	if(!empty($uri[0])) {
 		$control = ucfirst($uri[0]);
 	
 		if (file_exists("Controllers/$control.php")) {
@@ -11,7 +8,7 @@
 			if (class_exists($control)) {
 				$class_name = $control;
 				$control_obj = new $class_name;
-				if (isset($uri[1]) && $uri[1] !== '') {
+				if (!empty($uri[1])) {
 					$method = $uri[1];
 					if (method_exists($control_obj, $method)) {
 						$control_obj->$method();
