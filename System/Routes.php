@@ -19,9 +19,6 @@
                     if (!empty($uri[1])) {
                         $method = $uri[1];
                         if (method_exists($control_obj, $method)) {
-                            var_dump($control_obj);
-                            var_dump($method);
-                            exit;
                             $params = array_slice($uri, 2);
                             call_user_func_array(array($control_obj, $method), $params);
                         } 
