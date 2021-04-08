@@ -10,8 +10,8 @@
                 $control = "Home";
                 
             }
-            if (file_exists("Controllers" . DIRECTORY_SEPARATOR . $control.".php")) {
-                $control = "Controllers" . DIRECTORY_SEPARATOR . $control;
+            if (file_exists("Controllers/".$control.".php")) {
+                $control = "Controllers\\".$control;
                 if (class_exists($control)) {
                     $class_name = $control;
                     $control_obj = new $class_name;
@@ -27,7 +27,6 @@
                         }
                     } 
                     else {
-                        // If uri[1] is empty call the index method in the class if it exists
                         if (method_exists($control_obj, "index")) {
                             $control_obj->index();
                         } 
