@@ -1,10 +1,11 @@
 <?php
     namespace Controllers;
+
     class Auth {
-        public function test() {
-            echo "test";
+        public function test($first, $second) {
+            echo $first . " " . $second;
         }
         public function index() {
-            echo "index";
+            echo "Auth Index";
         }
     }
