@@ -10,7 +10,7 @@
                 $control = "Home";  
             }
 
-            if (file_exists("Controllers/".$control.".php")) {
+            if (file_exists("Controllers" . DIRECTORY_SEPARATOR . $control.".php")) {
                 $control = "Controllers\\".$control;
                 if (class_exists($control)) {
                     $class_name = $control;
