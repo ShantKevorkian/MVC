@@ -7,18 +7,21 @@
                 $control = ucfirst($uri[0]);
             }
             else {
-                $control = "Home";
-                
+                $control = "Home";  
             }
+            
             if (file_exists("Controllers/".$control.".php")) {
                 $control = "Controllers\\".$control;
                 if (class_exists($control)) {
                     $class_name = $control;
+                    var_dump($class_name);
                     $control_obj = new $class_name;
                     
                     if (!empty($uri[1])) {
                         $method = $uri[1];
                         if (method_exists($control_obj, $method)) {
+                            var_dump($control_obj);
+                            exit;
                             $params = array_slice($uri, 2);
                             call_user_func_array(array($control_obj, $method), $params);
                         } 
