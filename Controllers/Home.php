@@ -1,11 +1,9 @@
 <?php
     namespace Controllers;
+    use System\View;
 
-    class Home {
-        public function test($r) {
-            echo $r;
-        }
+    class Home extends View {
         public function index() {
-            echo "Home Index";
+            $this->redirect("Register");
         }
     }
