@@ -11,11 +11,9 @@
             }
 
             if (file_exists("Controllers" . DIRECTORY_SEPARATOR . $control.".php")) {
-                $control = "Controllers\\".$control;
-                if (class_exists($control)) {
-                    $class_name = $control;
+                $class_name = "Controllers\\".$control;
+                if (class_exists($class_name)) {
                     $control_obj = new $class_name;
-                    
                     if (!empty($uri[1])) {
                         $method = $uri[1];
                         if (method_exists($control_obj, $method)) {

@@ -1,9 +1,9 @@
 <?php
     namespace Controllers;
-    use System\View;
+    use System\Controller;
 
-    class Home extends View {
+    class Home extends Controller {
         public function index() {
-            $this->redirect("Register");
+            $this->view->render("welcome");
         }
     }
