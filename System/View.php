@@ -22,4 +22,8 @@
                 echo "Page '$file_name' does not exist";
             }
         }
+
+        function __get($name) {
+            return null;
+        }
     }
