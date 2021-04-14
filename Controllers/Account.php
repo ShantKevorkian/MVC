@@ -16,7 +16,6 @@
 
 
         public function index() {
-
             $user = new User;
             $userInfo = $user->getUserName($_SESSION["userId"]);
             $this->view->userName = $userInfo['name'];
