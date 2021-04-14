@@ -1,12 +1,30 @@
 <?php
     namespace Controllers;
+
     use System\Controller;
+    use Models\User;
 
     class Auth extends Controller {
+
         public function register() {
+            unset($_SESSION['userId']);
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 if(!empty($_POST['name']) && !empty($_POST['email']) && !empty($_POST['password'])) {
-                    var_dump($_POST);
+                    $user = new User;
+                    $user_exist = $user->userExist($_POST['email'], false);
+
+                    if($user_exist != NULL) {
+                        $this->view->userError = "User already exixts";
+                    }
+                    else {
+                        $create_user = $user->create($_POST);
+                        if($create_user) {
+                            header("Location: login");
+                        }
+                        else {
+                            $this->view->createError = "Something went wrong";
+                        }
+                    }
                 }
                 else {
                     if(empty($_POST['name'])) {
@@ -23,10 +41,23 @@
             $this->view->render("register");
         }
 
+
         public function login() {
+            unset($_SESSION['userId']);
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 if(!empty($_POST['email']) && !empty($_POST['password'])) {
-                    var_dump($_POST);
+                    $pass = md5($_POST['password']);
+                    $user = new User;
+                    $login_user = $user->login($_POST['email'], $pass);
+
+                    if($login_user == NULL) {
+                        $this->view->loginError = "Email or password incorrect";
+                    }
+                    else {
+                        $_SESSION['userId'] =  $login_user['id'];
+                        header("Location: /account");
+                    }
+                    
                 }
                 else {
                     if(empty($_POST['email'])) {
@@ -40,7 +71,15 @@
             $this->view->render("login");
         }
 
+
+        public function logout() {
+            unset($_SESSION['userId']);
+            header("Location: login");
+        }
+
+        
         public function index() {
+            unset($_SESSION['userId']);
             echo "Auth Index";
         }
     }
