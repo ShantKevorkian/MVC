@@ -28,7 +28,6 @@
         } 
 
         public function insert($table_name, $data){
-            $data["password"] = md5($data['password']);
             $value_data = '';
             foreach($data as $key => $value) {  
                 $value_data .="'".$this->real_escape_string(htmlspecialchars($value))."', ";  

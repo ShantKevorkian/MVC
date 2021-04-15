@@ -60,9 +60,8 @@
                 }
 
                 else if(!empty($_POST['email']) && !empty($_POST['password'])) {
-                    $pass = md5($_POST['password']);
                     $user = new User;
-                    $login_user = $user->login($_POST['email'], $pass);
+                    $login_user = $user->login($_POST['email'], $_POST['password']);
 
                     if($login_user) {
                         $_SESSION['userId'] =  $login_user['id'];
