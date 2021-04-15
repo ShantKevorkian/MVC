@@ -6,7 +6,7 @@
 
     class Account extends Controller {
 
-        public function __construct() {
+        function __construct() {
             if (!isset($_SESSION["userId"])) {
                 header('Location: /auth/login');
                 exit;

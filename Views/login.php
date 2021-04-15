@@ -7,6 +7,7 @@
                 <label for="email">Email address</label>
                 <input type="email" class="form-control" name = "email" aria-describedby="emailHelp" placeholder="Enter email">
                 <small id="emailHelp" class="form-text text-danger"><?=$this->emailError?></small>
+                <small id="emailHelp" class="form-text text-danger"><?=$this->validateEmail?></small>
             </div>
             <div class="form-group">
                 <label for="password">Password</label>

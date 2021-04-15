@@ -11,10 +11,14 @@
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 if(!empty($_POST['name']) && !empty($_POST['email']) && !empty($_POST['password'])) {
                     $user = new User;
-                    $user_exist = $user->userExist($_POST['email'], false);
+                    $user_exist = $user->userExist($_POST['email']);
+                    
+                    if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+                        $this->view->validateEmail = "Invalid email format";
+                    }
 
-                    if($user_exist != NULL) {
-                        $this->view->userError = "User already exixts";
+                    else if($user_exist) {
+                        $this->view->userError = "User already exists";
                     }
                     else {
                         $create_user = $user->create($_POST);
@@ -50,7 +54,11 @@
                     $user = new User;
                     $login_user = $user->login($_POST['email'], $pass);
 
-                    if($login_user == NULL) {
+                    if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+                        $this->view->validateEmail = "Invalid email format";
+                    }
+
+                    else if(!$login_user) {
                         $this->view->loginError = "Email or password incorrect";
                     }
                     else {
