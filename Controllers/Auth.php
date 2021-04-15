@@ -64,12 +64,12 @@
                     $user = new User;
                     $login_user = $user->login($_POST['email'], $pass);
 
-                    if(!$login_user) {
-                        $this->view->loginError = "Email or password incorrect";
-                    }
-                    else {
+                    if($login_user) {
                         $_SESSION['userId'] =  $login_user['id'];
                         header("Location: /account");
+                    }
+                    else {
+                        $this->view->loginError = "Email or password incorrect";
                     }
                 }
             }
