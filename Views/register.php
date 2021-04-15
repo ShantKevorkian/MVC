@@ -4,18 +4,18 @@
         <h6 class="d-flex justify-content-center mt-2 form-text text-danger"><?=$this->userError?></h6>
         <form class = "m-5" action = "/auth/register" method = "POST">
             <div class="form-group">
-                <label for="name">Name</label>
+                <label for="name">Name <span class = "text-danger">*</span></label>
                 <input type="text" class="form-control" id="name" name = "name" placeholder="Full name" value = "<?=isset($_POST['name']) ? $_POST['name'] : ''?>">
                 <small id="emailHelp" class="form-text text-danger"><?=$this->nameError?></small>
             </div>
             <div class="form-group">
-                <label for="email">Email address</label>
+                <label for="email">Email address <span class = "text-danger">*</span></label>
                 <input type="email" class="form-control" id="email" name = "email" placeholder="Enter email" value = "<?=isset($_POST['email']) ? $_POST['email'] : ''?>">
                 <small id="emailHelp" class="form-text text-danger"><?=$this->emailError?></small>
                 <small id="emailHelp" class="form-text text-danger"><?=$this->validateEmail?></small>
             </div>
             <div class="form-group">
-                <label for="password">Password</label>
+                <label for="password">Password <span class = "text-danger">*</span></label>
                 <input type="password" class="form-control" id="password" name = "password">
                 <small id="emailHelp" class="form-text text-danger"><?=$this->passError?></small>
             </div>
