@@ -28,6 +28,14 @@
                 $upload = true;
                 $imageFileType = strtolower(pathinfo($_FILES['avatar']['name'],PATHINFO_EXTENSION));
                 $target_dir = "./Public/Images/Avatars/".$_FILES['avatar']['name'];
+                $check = getimagesize($_FILES["avatar"]["tmp_name"]);
+                if($check !== false) {
+                    $upload = true;
+                } 
+                else {
+                    $this->view->uploadError = "File is not an image.";
+                    $upload = false;
+                }
                 if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" ) {
                     $this->view->typeError = "Only jpg, png, jpeg, gif are allowed";
                     $upload = false;

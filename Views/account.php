@@ -7,6 +7,7 @@
                 </div>
                 <span id = "sizeError" class="d-flex justify-content-center text-danger"><?=$this->sizeError?></span>
                 <span id = "sizeError" class="d-flex justify-content-center text-danger"><?=$this->typeError?></span>
+                <span id = "sizeError" class="d-flex justify-content-center text-danger"><?=$this->uploadError?></span>
                 <div class="custom-file">
                     <form action="" method="POST" enctype="multipart/form-data"> 
                         <input type="file" class = "custom-file-input text-light" name="avatar" id = "avatar" onchange="this.form.submit();">
