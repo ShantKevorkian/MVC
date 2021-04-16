@@ -4,6 +4,6 @@
 
     class Home extends Controller {
         public function index() {
-            $this->view->render("welcome");
+            $this->view->render("welcome", false);
         }
     }

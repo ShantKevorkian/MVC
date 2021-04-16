@@ -32,4 +32,8 @@
             ];
             return $this->db->where('id', $id)->update("users", $newAvatar);
         }
+
+        public function getFriends($id) {
+            return $this->db->select("SELECT * FROM users WHERE NOT id = $id");
+        }
     }
