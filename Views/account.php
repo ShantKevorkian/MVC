@@ -5,7 +5,8 @@
                 <div class = "d-flex justify-content-center">
                     <img src="Public/Images/Avatars/<?=$this->userAvatar?>" alt="avatar"  width='350' height='350' class="rounded">
                 </div>
-                <span id = "sizeError" class="text-danger"><?=$this->sizeError?></span>
+                <span id = "sizeError" class="d-flex justify-content-center text-danger"><?=$this->sizeError?></span>
+                <span id = "sizeError" class="d-flex justify-content-center text-danger"><?=$this->typeError?></span>
                 <div class="custom-file">
                     <form action="" method="POST" enctype="multipart/form-data"> 
                         <input type="file" class = "custom-file-input text-light" name="avatar" id = "avatar" onchange="this.form.submit();">
