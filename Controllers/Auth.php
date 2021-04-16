@@ -33,7 +33,7 @@
                     else {
                         $create_user = $user->create($_POST);
                         if($create_user) {
-                            header("Location: login");
+                            header("Location: /auth/login");
                         }
                         else {
                             $this->view->createError = "Something went wrong";
@@ -41,7 +41,7 @@
                     }
                 }
             }
-            $this->view->render("register");
+            $this->view->render("register", false);
         }
 
 
@@ -72,13 +72,13 @@
                     }
                 }
             }
-            $this->view->render("login");
+            $this->view->render("login", false);
         }
 
 
         public function logout() {
             unset($_SESSION['userId']);
-            header("Location: login");
+            header("Location: /auth/login");
         }
 
         

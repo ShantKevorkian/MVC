@@ -22,7 +22,14 @@
             return $this->db->select("SELECT id FROM users WHERE email = '$email' AND password = '$password'", false);
         }
 
-        public function getUserName($id) {
-            return $this->db->select("SELECT name FROM users WHERE id = $id", false);
+        public function getUserInfo($id) {
+            return $this->db->select("SELECT name, avatar FROM users WHERE id = $id", false);
+        }
+
+        public function updateUserImage($filename, $id) {
+            $newAvatar = [
+                "avatar" => "$filename"
+            ];
+            return $this->db->where('id', $id)->update("users", $newAvatar);
         }
     }

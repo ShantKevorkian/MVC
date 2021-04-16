@@ -1,9 +1,21 @@
-<div class = "container">
-    <div class="col-md-4 offset-md-4 bg-light border border-secondary rounded mt-5">
-        <h3 class="d-flex justify-content-center">Welcome <?=$this->userName?></h3>
-        <div class = "d-flex justify-content-center">
-            <img src="/Public/Images/avatar.png" alt="avatar">
+<div class = "container-fluid">
+    <div class="row mt-2">
+        <div class="col-sm-3">
+            <div class="bg-light border border-secondary rounded mt-2 border border-secondary">
+                <div class = "d-flex justify-content-center">
+                    <img src="Public/Images/Avatars/<?=$this->userAvatar?>" alt="avatar"  width='350' height='350' class="rounded">
+                </div>
+                <span id = "sizeError" class="text-danger"><?=$this->sizeError?></span>
+                <div class="custom-file">
+                    <form action="" method="POST" enctype="multipart/form-data"> 
+                        <input type="file" class = "custom-file-input text-light" name="avatar" id = "avatar" onchange="this.form.submit();">
+                        <label class="custom-file-label" for="image">Choose Image to Upload</label>
+                    </form>
+                </div>
+            </div>
         </div>
-        <a href = "auth/logout" class="btn btn-secondary w-100 mt-4 mb-4">Logout</a>
+        <div class="col-sm">
+            <h3 class="text-light"><?=$this->userName?></h3>
+        </div>
     </div>
 </div>
