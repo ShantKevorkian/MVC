@@ -23,7 +23,7 @@
                         <span id = 'error' class='d-flex justify-content-center text-danger'><?=$this->error_msg?></span>
                         <div class='custom-file'>
                             <form method='POST' enctype='multipart/form-data'> 
-                                <input type='file' class = 'custom-file-input text-light' name='avatar' onchange='this.form.submit();'>
+                                <input type='file' class = 'custom-file-input' name='avatar' onchange='this.form.submit();'>
                                 <label class='custom-file-label' for = 'image'>Choose Image to Upload</label>
                             </form>
                         </div>
