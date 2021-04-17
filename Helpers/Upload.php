@@ -22,7 +22,7 @@
                     $upload = true;
                 } 
                 else {
-                    $this->up = "File is not an image.";
+                    $this->up = "File is not an image";
                     $upload = false;
                 }
                 if($imageFileType != $this->options["allowed_types"][0] && $imageFileType != $this->options["allowed_types"][1] && $imageFileType != $this->options["allowed_types"][2] && $imageFileType != $this->options["allowed_types"][3]) {
