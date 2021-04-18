@@ -27,14 +27,7 @@
                 }
             }
 
-            $userInfo = $user->getUserInfo($_SESSION['userId']);
-            if($userInfo["avatar"] == NULL) {
-                $this->view->userAvatar = "avatar.png";
-            }
-            else {
-                $this->view->userAvatar = $userInfo['avatar'];
-            }
-            $this->view->userName = $userInfo['name'];
+            $this->view->userInfo = $user->getUserInfo($_SESSION['userId']);
             $this->view->render("account");
         }
 

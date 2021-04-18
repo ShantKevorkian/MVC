@@ -4,7 +4,7 @@
 
     class Upload {
 
-        public $options = [
+        private $options = [
             "allowed_types" => ["jpg", "png", "jpeg", "gif"],
             "allowed_size" => 3
         ];
