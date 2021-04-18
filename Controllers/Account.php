@@ -23,7 +23,7 @@
                 $target_dir = "./Public/Images/Avatars/".$_FILES['avatar']['name'];
                 $result = $upload->execute($_FILES, $target_dir);
                 if(!$result) {
-                    $this->view->error_msg = $upload->up;
+                    $this->view->error_msg = $upload->error;
                 }
             }
 

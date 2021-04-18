@@ -9,7 +9,7 @@
             "allowed_size" => 3
         ];
         
-        public $up;
+        public $error;
 
         public function execute($file_name, $location) {
             $upload = true;
@@ -19,15 +19,15 @@
             $checkImage = getimagesize($file_name["avatar"]["tmp_name"]);
             
             if(!$checkImage){
-                $this->up = "File is not an image";
+                $this->error = "File is not an image";
                 $upload = false;
             }
             if($imageFileType != $this->options["allowed_types"][0] && $imageFileType != $this->options["allowed_types"][1] && $imageFileType != $this->options["allowed_types"][2] && $imageFileType != $this->options["allowed_types"][3]) {
-                $this->up = "Only jpg, png, jpeg, gif are allowed";
+                $this->error = "Only jpg, png, jpeg, gif are allowed";
                 $upload = false;
             }
             if($file_name["avatar"]["size"] > $this->options["allowed_size"] * 1000000) {
-                $this->up = "File too large to upload";
+                $this->error = "File too large to upload";
                 $upload = false;
             }
             if($upload){
