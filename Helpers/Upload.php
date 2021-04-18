@@ -17,11 +17,8 @@
             $newFileName = date("H-i-s"). "." . $imageFileType;
             $target_dir = "./Public/Images/Avatars/".$newFileName;
             $checkImage = getimagesize($file_name["avatar"]["tmp_name"]);
-
-            if($checkImage != false) {
-                $upload = true;
-            } 
-            else {
+            
+            if(!$checkImage){
                 $this->up = "File is not an image";
                 $upload = false;
             }
