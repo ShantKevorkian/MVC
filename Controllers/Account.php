@@ -7,40 +7,70 @@
 
     class Account extends Controller {
 
+        private $user;
+
         function __construct() {
             if (!isset($_SESSION["userId"])) {
                 header('Location: /auth/login');
             }
             parent::__construct();
+            $this->user = new User;
+
         }
 
 
         public function index() {
-            $user = new User;
 
             if($_SERVER['REQUEST_METHOD'] == "POST") {
                 $upload = new Upload;
-                $target_dir = "./Public/Images/Avatars/".$_FILES['avatar']['name'];
-                $result = $upload->execute($_FILES, $target_dir);
-                if(!$result) {
+
+                $imageFileType = strtolower(pathinfo($_FILES["avatar"]["name"], PATHINFO_EXTENSION));
+
+                $upload->options["change_name"] = true;
+
+                if($upload->options["change_name"]) {
+                    $fileName = date("H-i-s"). "." . $imageFileType;
+                }
+                else {
+                    $fileName = $_FILES["avatar"]["name"];
+                }
+                $target_dir = "./Public/Images/Avatars/".$fileName;
+                $result = $upload->execute($_FILES["avatar"], $target_dir);
+
+                if($result) {
+                    $this->user->updateUserImage($fileName, $_SESSION['userId']);
+                }
+                else {
                     $this->view->error_msg = $upload->error;
                 }
             }
 
-            $this->view->userInfo = $user->getUserInfo($_SESSION['userId']);
+            $this->view->userInfo = $this->user->getUserInfo($_SESSION['userId']);
             $this->view->render("account");
         }
 
         public function friends() {
-            $user = new User;
-            $this->view->friends = $user->getFriends($_SESSION["userId"]);
+            $this->view->friends = $this->user->getFriends($_SESSION["userId"]);
             $this->view->render("friends");
         }
 
         public function user($id) {
-            $user = new User;
-            $this->view->userInfo = $user->getUserInfo($id);
+            $this->view->userInfo = $this->user->getUserInfo($id);
+            if($this->view->userInfo['id'] == $_SESSION['userId']) {
+                header("Location: /account");
+            }
             $this->view->friendsAccount = true;
             $this->view->render("account");
+        }
+
+        public function chat($id) {
+            $data = [
+                "from_id" => $_SESSION['userId'],
+                "to_id" => $id
+            ];
+            $this->user->db->insert("messages", $data);
+            $this->view->userInfo = $this->user->getUserInfo($id);
+            $this->view->get_msg = $this->user->getMessages($id);
+            $this->view->render("chat");
         }
     }

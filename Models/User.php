@@ -23,7 +23,7 @@
         }
 
         public function getUserInfo($id) {
-            return $this->db->select("SELECT name, avatar FROM users WHERE id = $id", false);
+            return $this->db->select("SELECT id, name, avatar FROM users WHERE id = $id", false);
         }
 
         public function updateUserImage($filename, $id) {
@@ -34,6 +34,11 @@
         }
 
         public function getFriends($id) {
-            return $this->db->select("SELECT * FROM users WHERE NOT id = $id");
+            return $this->db->select("SELECT id, name, avatar FROM users WHERE id != $id");
+        }
+
+        public function getMessages($id) {
+            $user_id = $_SESSION['userId'];
+            return $this->db->select("SELECT from_id, body, date FROM messages WHERE (from_id = $id AND to_id = $user_id) OR (from_id = $user_id AND to_id = $id) ORDER BY date");
         }
     }

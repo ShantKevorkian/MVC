@@ -1,22 +1,20 @@
 <?php
     namespace Helpers;
-    use Models\User;
 
     class Upload {
 
-        private $options = [
+        public $options = [
             "allowed_types" => ["jpg", "png", "jpeg", "gif"],
-            "allowed_size" => 3
+            "allowed_size" => 3,
+            "change_name" => false
         ];
         
         public $error;
 
-        public function execute($file_name, $location) {
+        public function execute($file_name, $target_dir) {
             $upload = true;
-            $imageFileType = strtolower(pathinfo($file_name["avatar"]["name"], PATHINFO_EXTENSION));
-            $newFileName = date("H-i-s"). "." . $imageFileType;
-            $target_dir = "./Public/Images/Avatars/".$newFileName;
-            $checkImage = getimagesize($file_name["avatar"]["tmp_name"]);
+            $imageFileType = strtolower(pathinfo($file_name["name"], PATHINFO_EXTENSION));
+            $checkImage = getimagesize($file_name["tmp_name"]);
             
             if(!$checkImage){
                 $this->error = "File is not an image";
@@ -26,16 +24,20 @@
                 $this->error = "Only jpg, png, jpeg, gif are allowed";
                 $upload = false;
             }
-            if($file_name["avatar"]["size"] > $this->options["allowed_size"] * 1000000) {
+            if($file_name["size"] > $this->options["allowed_size"] * 1000000) {
                 $this->error = "File too large to upload";
                 $upload = false;
             }
-            if($upload){
-                if(move_uploaded_file($file_name["avatar"]["tmp_name"],  $target_dir)){
-                    $user = new User;
-                    $user->updateUserImage($newFileName, $_SESSION['userId']);
+            if($upload) {
+                if(move_uploaded_file($file_name["tmp_name"],  $target_dir)) {
+                    return $upload;
+                }
+                else {
+                    $upload = false;
+                    $this->error = "Something went wrong";
                 }
             }
+            
         return $upload;
         }
     }
