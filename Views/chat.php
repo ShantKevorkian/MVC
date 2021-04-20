@@ -4,7 +4,7 @@
 <div class = "container-fluid mt-5">
     <div class="m-auto bg-light border border-secondary rounded mt-5 w-50">
         <div class = "bg-secondary">
-            <h4 class = 'p-3 text-light'><?=$this->userInfo['name']?></h4>
+            <h4 class = 'p-3 text-light m-0'><?=$this->userInfo['name']?></h4>
         </div>
         <div style = "height: 700px; overflow-y: auto" class = "d-flex flex-column">
             <?php
