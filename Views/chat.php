@@ -8,7 +8,7 @@
         </div>
         <div style = "height: 700px; overflow-y: auto;" class = "d-flex flex-column"> 
             <?php foreach ($this->get_msg as $msg): ?>
-                <?php if($msg["body"] != NULL): ?>
+                <?php if($msg["body"] != ''): ?>
                     <?php if($msg["from_id"] == $_SESSION['userId']): ?>
                         <div class = "w-75">
                             <h5 class = "mt-4 ml-3 mb-0 float-left bg-primary p-3 text-light" style = "border-radius: 20px;"><?=$msg["body"]?></h5>
