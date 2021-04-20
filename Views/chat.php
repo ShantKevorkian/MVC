@@ -22,12 +22,10 @@
             <?php endforeach; ?> 
         </div>
         <div class = "mt-auto">
-                <form action = "/account/chatUpdateMessage/<?=$this->userInfo['id']?>" method = "POST">
-                    <div class="input-group">
-                        <input type="text" class="form-control p-2" placeholder="Enter message..." name = "chat" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                        <button class="btn btn-secondary"><i class = "fa fa-paper-plane" style = "width: 35px;" aria-hidden="true"></i></button>
-                    </div>
-                </form>
+            <div class="input-group">
+                <input type="text" class="form-control p-2" placeholder="Enter message..." name = "chat" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <button class="btn btn-secondary"><i class = "fa fa-paper-plane" style = "width: 35px;" aria-hidden="true"></i></button>
+            </div>     
         </div>
     </div>
 </div>
