@@ -6,9 +6,8 @@
         <div class = "bg-secondary">
             <h4 class = 'p-3 text-light m-0'><?=$this->userInfo['name']?></h4>
         </div>
-        <div style = "height: 700px; overflow-y: auto" class = "d-flex flex-column">
-            <?php
-                foreach ($this->get_msg as $msg): ?>
+        <div style = "height: 700px; overflow-y: auto" class = "d-flex flex-column"> 
+            <?php foreach ($this->get_msg as $msg): ?>
                 <?php if($msg["body"] != NULL): ?>
                     <?php if($msg["from_id"] == $_SESSION['userId']): ?>
                         <div class = "w-75">
@@ -20,13 +19,15 @@
                         </div>
                     <?php endif; ?>
                 <?php endif; ?>
-            <?php endforeach; ?>
+            <?php endforeach; ?> 
         </div>
         <div class = "mt-auto">
-            <div class="input-group">
-                <input type="text" class="form-control p-2" placeholder="Enter message..." aria-label="Recipient's username" aria-describedby="basic-addon2">
-                <button class="btn btn-secondary"><i class = "fa fa-paper-plane" style = "width: 35px;" aria-hidden="true"></i></button>
-            </div>
+                <form action = "/account/chatUpdateMessage/<?=$this->userInfo['id']?>" method = "POST">
+                    <div class="input-group">
+                        <input type="text" class="form-control p-2" placeholder="Enter message..." name = "chat" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        <button class="btn btn-secondary"><i class = "fa fa-paper-plane" style = "width: 35px;" aria-hidden="true"></i></button>
+                    </div>
+                </form>
         </div>
     </div>
 </div>

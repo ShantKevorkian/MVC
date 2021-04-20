@@ -66,11 +66,11 @@
         public function chat($id) {
             $data = [
                 "from_id" => $_SESSION['userId'],
-                "to_id" => $id
+                "to_id" => $id,
             ];
             $this->user->db->insert("messages", $data);
             $this->view->userInfo = $this->user->getUserInfo($id);
-            $this->view->get_msg = $this->user->getMessages($id);
+            $this->view->get_msg = $this->user->getMessages($_SESSION['userId'], $id);
             $this->view->render("chat");
         }
     }

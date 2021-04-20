@@ -37,8 +37,7 @@
             return $this->db->select("SELECT id, name, avatar FROM users WHERE id != $id");
         }
 
-        public function getMessages($id) {
-            $user_id = $_SESSION['userId'];
-            return $this->db->select("SELECT from_id, body, date FROM messages WHERE (from_id = $id AND to_id = $user_id) OR (from_id = $user_id AND to_id = $id) ORDER BY date");
+        public function getMessages($from, $to) {
+            return $this->db->select("SELECT from_id, body, date FROM messages WHERE (from_id = $from AND to_id = $to) OR (from_id = $to AND to_id = $from) ORDER BY date");
         }
     }
