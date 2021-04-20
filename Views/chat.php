@@ -6,7 +6,7 @@
         <div class = "bg-secondary">
             <h4 class = 'p-3 text-light m-0'><?=$this->userInfo['name']?></h4>
         </div>
-        <div style = "height: 700px; overflow-y: auto" class = "d-flex flex-column"> 
+        <div style = "height: 700px; overflow-y: auto;" class = "d-flex flex-column"> 
             <?php foreach ($this->get_msg as $msg): ?>
                 <?php if($msg["body"] != NULL): ?>
                     <?php if($msg["from_id"] == $_SESSION['userId']): ?>
