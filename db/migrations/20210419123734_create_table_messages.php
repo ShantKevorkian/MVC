@@ -19,7 +19,7 @@ final class CreateTableMessages extends AbstractMigration
     public function change(): void
     {
         $table = $this->table('messages');
-        $table->addColumn('body', 'text', ['null' => true])
+        $table->addColumn('body', 'text')
               ->addColumn('date', 'timestamp', ['default' => 'CURRENT_TIMESTAMP'])
               ->addColumn('from_id', 'integer', ['limit' => 11])
               ->addColumn('to_id', 'integer', ['limit' => 11])

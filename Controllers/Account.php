@@ -65,6 +65,7 @@
 
         public function chat($id) {
             $data = [
+                "body" => '',
                 "from_id" => $_SESSION['userId'],
                 "to_id" => $id,
             ];
