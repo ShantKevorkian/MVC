@@ -11,11 +11,15 @@
                 <?php if($msg["body"] != NULL): ?>
                     <?php if($msg["from_id"] == $_SESSION['userId']): ?>
                         <div class = "w-75">
-                            <h5 class = "mt-4 ml-3 float-left bg-primary p-3 text-light" style = "border-radius: 20px;"><?=$msg["body"]?></h5>
+                            <h5 class = "mt-4 ml-3 mb-0 float-left bg-primary p-3 text-light" style = "border-radius: 20px;"><?=$msg["body"]?></h5>
                         </div>
+                        <small class = "ml-4"><?=$msg["date"]?></small>
                     <?php else: ?>
                         <div>
-                            <h5 class = "mt-4 mr-3 float-right bg-dark p-3 text-light" style = "border-radius: 20px;"><?=$msg["body"]?></h5>
+                            <h5 class = "mt-4 mr-3 mb-0 float-right bg-dark p-3 text-light" style = "border-radius: 20px;"><?=$msg["body"]?></h5>
+                        </div>
+                        <div>
+                            <small class = "mr-4 float-right"><?=$msg["date"]?></small>
                         </div>
                     <?php endif; ?>
                 <?php endif; ?>
