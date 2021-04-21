@@ -64,14 +64,23 @@
         }
 
         public function chat($id) {
-            $data = [
-                "body" => '',
-                "from_id" => $_SESSION['userId'],
-                "to_id" => $id,
-            ];
-            $this->user->db->insert("messages", $data);
             $this->view->userInfo = $this->user->getUserInfo($id);
             $this->view->get_msg = $this->user->getMessages($_SESSION['userId'], $id);
             $this->view->render("chat");
         }
+
+        public function getMsg($id) {
+
+            if(isset($_POST['chat'])) {
+                $data = [
+                    "body" => $_POST['chat'],
+                    "from_id" => $_SESSION['userId'],
+                    "to_id" => $id,
+                ];
+                $this->user->db->insert("messages", $data);
+                $this->view->get_last_msg = $this->user->getLastMessage();
+                echo json_encode($this->view->get_last_msg);
+            }
+        }
+
     }
