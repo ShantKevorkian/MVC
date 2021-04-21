@@ -10,13 +10,17 @@
         <?php foreach ($this->get_msg as $msg): ?>
                 <?php if($msg["body"] != ''): ?>
                     <?php if($msg["from_id"] == $_SESSION['userId']): ?>
+                        <small class = "ml-4 mt-4">You</small>
                         <div class = "w-75">
-                            <h5 class = "mt-4 ml-3 mb-0 float-left bg-primary p-3 text-light" style = "border-radius: 20px;"><?=$msg["body"]?></h5>
+                            <h5 class = "ml-3 mb-0 float-left bg-primary p-3 text-light" style = "border-radius: 20px;"><?=$msg["body"]?></h5>
                         </div>
                         <small class = "ml-4 mb-1"><?=$msg["date"]?></small>
                     <?php else: ?>
                         <div>
-                            <h5 class = "mt-4 mr-3 mb-0 float-right bg-dark p-3 text-light" style = "border-radius: 20px;"><?=$msg["body"]?></h5>
+                            <small class = "mr-4 mt-4 float-right"><?=$this->userInfo['name']?></small>
+                        </div>
+                        <div>
+                            <h5 class = "mr-3 mb-0 float-right bg-dark p-3 text-light" style = "border-radius: 20px;"><?=$msg["body"]?></h5>
                         </div>
                         <div>
                             <small class = "mr-4 mb-1 float-right"><?=$msg["date"]?></small>
@@ -25,11 +29,11 @@
                 <?php endif; ?>
             <?php endforeach; ?>
         </div>
-        <div class = "mt-auto" id = "test">
+        <div class = "mt-auto">
             <form>
                 <div class="input-group">
                     <input type="text" autocomplete="off" class="form-control p-2" placeholder="Enter message..." id = "chatInput" name = "chat" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                    <button type = "submit" id = "test" class="btn btn-secondary rounded-0 pl-4 pr-4">Send<i class = "fa fa-paper-plane ml-2" aria-hidden="true"></i></button>
+                    <button type = "submit" class="btn btn-secondary rounded-0 pl-4 pr-4">Send<i class = "fa fa-paper-plane ml-2" aria-hidden="true"></i></button>
                 </div> 
             </form>
         </div>
@@ -52,7 +56,8 @@
                     chat: q
                 },
                 success: function(response) {
-                    $("#chatMsg").append("<div class = 'w-75'><h5 class = 'mt-4 ml-3 mb-0 float-left bg-primary p-3 text-light' style = 'border-radius: 20px;''>" + response['body'] + "</h5></div>");
+                    $("#chatMsg").append("<small class = 'ml-4 mt-4'>You</small>");
+                    $("#chatMsg").append("<div class = 'w-75'><h5 class = 'ml-3 mb-0 float-left bg-primary p-3 text-light' style = 'border-radius: 20px;''>" + response['body'] + "</h5></div>");
                     $("#chatMsg").append("<small class = 'ml-4 mb-1'>" + response['date'] + "</small>");
                     $('#chatMsg').scrollTop($('#chatMsg')[0].scrollHeight);
                 }
