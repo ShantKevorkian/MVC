@@ -2,7 +2,7 @@
     <?php header("Location: /account");?>
 <?php endif; ?>
 <div class = "container-fluid mt-5">
-    <div class="m-auto bg-light border border-secondary rounded mt-5 w-50">
+    <div class="m-auto bg-light border border-secondary rounded mt-5" style = "width: 40%;">
         <div class = "bg-secondary">
             <h4 class = 'p-3 text-light m-0'><?=$this->userInfo['name']?></h4>
         </div>
@@ -13,19 +13,19 @@
                         <div class = "w-75">
                             <h5 class = "mt-4 ml-3 mb-0 float-left bg-primary p-3 text-light" style = "border-radius: 20px;"><?=$msg["body"]?></h5>
                         </div>
-                        <small class = "ml-4"><?=$msg["date"]?></small>
+                        <small class = "ml-4 mb-1"><?=$msg["date"]?></small>
                     <?php else: ?>
                         <div>
                             <h5 class = "mt-4 mr-3 mb-0 float-right bg-dark p-3 text-light" style = "border-radius: 20px;"><?=$msg["body"]?></h5>
                         </div>
                         <div>
-                            <small class = "mr-4 float-right"><?=$msg["date"]?></small>
+                            <small class = "mr-4 mb-1 float-right"><?=$msg["date"]?></small>
                         </div>
                     <?php endif; ?>
                 <?php endif; ?>
             <?php endforeach; ?>
         </div>
-        <div class = "mt-auto">
+        <div class = "mt-auto" id = "test">
             <form>
                 <div class="input-group">
                     <input type="text" autocomplete="off" class="form-control p-2" placeholder="Enter message..." id = "chatInput" name = "chat" aria-label="Recipient's username" aria-describedby="basic-addon2">
@@ -39,7 +39,6 @@
 <script>
     $(document).ready(function(){
         $('form').submit(function(event) {
-            $(document).scrollTop($(document.getElementById("test")).height());
             event.preventDefault();
             let q = $("#chatInput").val();
             if(q == '') {
@@ -54,7 +53,8 @@
                 },
                 success: function(response) {
                     $("#chatMsg").append("<div class = 'w-75'><h5 class = 'mt-4 ml-3 mb-0 float-left bg-primary p-3 text-light' style = 'border-radius: 20px;''>" + response['body'] + "</h5></div>");
-                    $("#chatMsg").append("<small class = 'ml-4'>" + response['date'] + "</small>");
+                    $("#chatMsg").append("<small class = 'ml-4 mb-1'>" + response['date'] + "</small>");
+                    $('#chatMsg').scrollTop($('#chatMsg')[0].scrollHeight);
                 }
             });
             $("#chatInput").val("");
