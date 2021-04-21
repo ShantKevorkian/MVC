@@ -40,8 +40,4 @@
         public function getMessages($from, $to) {
             return $this->db->select("SELECT * FROM messages WHERE (from_id = $from AND to_id = $to) OR (from_id = $to AND to_id = $from) ORDER BY date");
         }
-
-        public function getLastMessage() {
-            return $this->db->select("SELECT date, body FROM messages ORDER BY id DESC LIMIT 1", false);
-        }
     }

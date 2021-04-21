@@ -70,16 +70,16 @@
         }
 
         public function getMsg($id) {
-
             if(isset($_POST['chat'])) {
                 $data = [
                     "body" => $_POST['chat'],
                     "from_id" => $_SESSION['userId'],
                     "to_id" => $id,
                 ];
+                
                 $this->user->db->insert("messages", $data);
-                $this->view->get_last_msg = $this->user->getLastMessage();
-                echo json_encode($this->view->get_last_msg);
+                $this->view->get_last_msg = $this->user->getMessages($_SESSION['userId'], $id);
+                echo json_encode(end($this->view->get_last_msg));
             }
         }
 
