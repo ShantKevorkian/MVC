@@ -2,7 +2,7 @@
     <?php header("Location: /account");?>
 <?php endif; ?>
 <div class = "container-fluid mt-5">
-    <div class="m-auto bg-light border border-secondary rounded mt-5" style = "width: 40%;">
+    <div class="m-auto bg-light border border-secondary rounded mt-5" style = "width: 35%;">
         <div class = "bg-secondary">
             <h4 class = 'p-3 text-light m-0'><?=$this->userInfo['name']?></h4>
         </div>
