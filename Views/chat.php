@@ -29,10 +29,10 @@
                 <?php endif; ?>
             <?php endforeach; ?>
         </div>
-        <div class = "mt-auto">
+        <div class = "mt-auto border-top border-secondary rounded">
             <div class="input-group">
                 <input type="text" autocomplete="off" class="form-control p-2" placeholder="Enter message..." id = "chatInput" name = "chat" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                <button class="btn btn-secondary rounded-0 pl-4 pr-4" id = "button">Send<i class = "fa fa-paper-plane ml-2" aria-hidden="true"></i></button>
+                <button class="btn btn-secondary btn-sm rounded-0 pl-3 pr-3" id = "button">Send<i class = "fa fa-paper-plane ml-2" aria-hidden="true"></i></button>
             </div> 
         </div>
     </div>
