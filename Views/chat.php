@@ -10,14 +10,14 @@
             <?php foreach ($this->get_msg as $msg): ?>
                 <?php if($msg["body"] != ''): ?>
                     <?php if($msg["from_id"] == $_SESSION['userId']): ?>
-                        <small class = "ml-4 mt-4">You</small>
+                        <small class = "ml-4 mt-3">You</small>
                         <div class = "w-75">
                             <h5 class = "ml-3 mb-0 float-left bg-primary p-3 text-light" style = "border-radius: 20px;"><?=$msg["body"]?></h5>
                         </div>
                         <small class = "ml-4 mb-1"><?=$msg["time"]?></small>
                     <?php else: ?>
                         <div>
-                            <small class = "mr-4 mt-4 float-right"><?=$this->userInfo['name']?></small>
+                            <small class = "mr-4 mt-3 float-right"><?=$this->userInfo['name']?></small>
                         </div>
                         <div>
                             <h5 class = "mr-3 mb-0 float-right bg-dark p-3 text-light" style = "border-radius: 20px;"><?=$msg["body"]?></h5>
@@ -56,7 +56,7 @@
                         chat: q
                     },
                     success: function(response) {
-                        $("#chatMsg").append("<small class = 'ml-4 mt-4'>You</small>");
+                        $("#chatMsg").append("<small class = 'ml-4 mt-3'>You</small>");
                         $("#chatMsg").append("<div class = 'w-75'><h5 class = 'ml-3 mb-0 float-left bg-primary p-3 text-light' style = 'border-radius: 20px;'>" + response['body'] + "</h5></div>");
                         $("#chatMsg").append("<small class = 'ml-4 mb-1'>" + response['time'] + "</small>");
                         $('#chatMsg').scrollTop($('#chatMsg')[0].scrollHeight);
