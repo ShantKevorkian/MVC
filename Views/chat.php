@@ -30,19 +30,22 @@
             <?php endforeach; ?>
         </div>
         <div class = "mt-auto">
-            <form>
-                <div class="input-group">
-                    <input type="text" autocomplete="off" class="form-control p-2" placeholder="Enter message..." id = "chatInput" name = "chat" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                    <button type = "submit" class="btn btn-secondary rounded-0 pl-4 pr-4">Send<i class = "fa fa-paper-plane ml-2" aria-hidden="true"></i></button>
-                </div> 
-            </form>
+            <div class="input-group">
+                <input type="text" autocomplete="off" class="form-control p-2" placeholder="Enter message..." id = "chatInput" name = "chat" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <button class="btn btn-secondary rounded-0 pl-4 pr-4" id = "button">Send<i class = "fa fa-paper-plane ml-2" aria-hidden="true"></i></button>
+            </div> 
         </div>
     </div>
 </div>
 <script>
     $(document).ready(function(){
-        $('form').submit(function(event) {
-            event.preventDefault();
+        $("#chatInput").keyup(function(event) {
+            if (event.keyCode === 13) {
+                $("#button").click();
+            }
+        });
+    
+        $("#button").click(function() {
             let q = $("#chatInput").val();
             if(q.length > 0) {
                 $.ajax({
@@ -57,10 +60,10 @@
                         $("#chatMsg").append("<div class = 'w-75'><h5 class = 'ml-3 mb-0 float-left bg-primary p-3 text-light' style = 'border-radius: 20px;'>" + response['body'] + "</h5></div>");
                         $("#chatMsg").append("<small class = 'ml-4 mb-1'>" + response['time'] + "</small>");
                         $('#chatMsg').scrollTop($('#chatMsg')[0].scrollHeight);
+                        $("#chatInput").val("");
                     }
                 });
             }
-            $("#chatInput").val("");
         });
     });
 </script>
