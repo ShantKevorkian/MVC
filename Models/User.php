@@ -38,6 +38,6 @@
         }
 
         public function getMessages($from, $to) {
-            return $this->db->select("SELECT from_id, to_id, body, time(date) as date FROM messages WHERE (from_id = $from AND to_id = $to) OR (from_id = $to AND to_id = $from) ORDER BY date");
+            return $this->db->select("SELECT from_id, to_id, body, date_format(date,'%H:%i') as time FROM messages WHERE (from_id = $from AND to_id = $to) OR (from_id = $to AND to_id = $from) ORDER BY date");
         }
     }

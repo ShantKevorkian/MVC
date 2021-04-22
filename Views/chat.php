@@ -7,14 +7,14 @@
             <h4 class = 'p-3 text-light m-0'><?=$this->userInfo['name']?></h4>
         </div>
         <div style = "height: 700px; overflow-y: auto;" class = "d-flex flex-column" id = "chatMsg"> 
-        <?php foreach ($this->get_msg as $msg): ?>
+            <?php foreach ($this->get_msg as $msg): ?>
                 <?php if($msg["body"] != ''): ?>
                     <?php if($msg["from_id"] == $_SESSION['userId']): ?>
                         <small class = "ml-4 mt-4">You</small>
                         <div class = "w-75">
                             <h5 class = "ml-3 mb-0 float-left bg-primary p-3 text-light" style = "border-radius: 20px;"><?=$msg["body"]?></h5>
                         </div>
-                        <small class = "ml-4 mb-1"><?=$msg["date"]?></small>
+                        <small class = "ml-4 mb-1"><?=$msg["time"]?></small>
                     <?php else: ?>
                         <div>
                             <small class = "mr-4 mt-4 float-right"><?=$this->userInfo['name']?></small>
@@ -23,7 +23,7 @@
                             <h5 class = "mr-3 mb-0 float-right bg-dark p-3 text-light" style = "border-radius: 20px;"><?=$msg["body"]?></h5>
                         </div>
                         <div>
-                            <small class = "mr-4 mb-1 float-right"><?=$msg["date"]?></small>
+                            <small class = "mr-4 mb-1 float-right"><?=$msg["time"]?></small>
                         </div>
                     <?php endif; ?>
                 <?php endif; ?>
@@ -39,29 +39,27 @@
         </div>
     </div>
 </div>
-
 <script>
     $(document).ready(function(){
         $('form').submit(function(event) {
             event.preventDefault();
             let q = $("#chatInput").val();
-            if(q == '') {
-                return false;
+            if(q.length > 0) {
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url: "/account/getMsg/<?=$this->userInfo['id']?>",
+                    data: {
+                        chat: q
+                    },
+                    success: function(response) {
+                        $("#chatMsg").append("<small class = 'ml-4 mt-4'>You</small>");
+                        $("#chatMsg").append("<div class = 'w-75'><h5 class = 'ml-3 mb-0 float-left bg-primary p-3 text-light' style = 'border-radius: 20px;'>" + response['body'] + "</h5></div>");
+                        $("#chatMsg").append("<small class = 'ml-4 mb-1'>" + response['time'] + "</small>");
+                        $('#chatMsg').scrollTop($('#chatMsg')[0].scrollHeight);
+                    }
+                });
             }
-            $.ajax({
-                type: "POST",
-                dataType: "json",
-                url: "/account/getMsg/<?=$this->userInfo['id']?>",
-                data: {
-                    chat: q
-                },
-                success: function(response) {
-                    $("#chatMsg").append("<small class = 'ml-4 mt-4'>You</small>");
-                    $("#chatMsg").append("<div class = 'w-75'><h5 class = 'ml-3 mb-0 float-left bg-primary p-3 text-light' style = 'border-radius: 20px;''>" + response['body'] + "</h5></div>");
-                    $("#chatMsg").append("<small class = 'ml-4 mb-1'>" + response['date'] + "</small>");
-                    $('#chatMsg').scrollTop($('#chatMsg')[0].scrollHeight);
-                }
-            });
             $("#chatInput").val("");
         });
     });
