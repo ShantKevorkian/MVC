@@ -4,7 +4,7 @@
 <div class = "container-fluid mt-5">
     <div class="m-auto bg-light border border-secondary rounded mt-5" style = "width: 35%;">
         <div class = "bg-secondary">
-            <h4 class = 'p-3 text-light m-0'><?=$this->userInfo['name']?></h4>
+            <h4 class = 'p-3 text-light m-0'><a href = "/account/friends" class = "fas fa-angle-double-left mr-3 text-light" style = "text-decoration: none;"></a><?=$this->userInfo['name']?></h4>
         </div>
         <div style = "height: 700px; overflow-y: auto;" class = "d-flex flex-column" id = "chatMsg"> 
             <?php foreach ($this->get_msg as $msg): ?>
