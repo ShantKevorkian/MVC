@@ -81,8 +81,8 @@
             }
         }
 
-        public function getMsg($id, $lastId) {
-            $get_last_msg = $this->user->getMessages($_SESSION['userId'], $id, $lastId);
+        public function getMsg($to_id, $lastId) {
+            $get_last_msg = $this->user->getMessages($_SESSION['userId'], $to_id, $lastId);
             echo json_encode($get_last_msg);
         }
 
