@@ -37,7 +37,26 @@
             return $this->db->select("SELECT id, name, avatar FROM users WHERE id != $id");
         }
 
-        public function getMessages($from, $to) {
-            return $this->db->select("SELECT from_id, to_id, body, date_format(date,'%H:%i') as time FROM messages WHERE (from_id = $from AND to_id = $to) OR (from_id = $to AND to_id = $from) ORDER BY date");
+        public function insertMessage($body, $to) {
+            $data = [
+                "body" => $body,
+                "from_id" => $_SESSION['userId'],
+                "to_id" => $to
+            ];
+
+            return $this->db->insert("messages", $data);
         }
+
+        public function getLastMsgDate() {
+            return $this->db->select("SELECT date from messages ORDER BY id DESC LIMIT 1", false);
+        }
+
+        public function getMessages($from, $to, $lastId = 0) {
+            return $this->db->select("SELECT from_id, to_id, body, m.id, u.name, date 
+                                        FROM messages as m 
+                                        LEFT JOIN users as u ON m.from_id = u.id 
+                                        WHERE ((from_id = $from AND to_id = $to) OR (from_id = $to AND to_id = $from))
+                                        AND m.id > $lastId ORDER BY m.id");
+        }
+
     }

@@ -69,18 +69,21 @@
             $this->view->render("chat");
         }
 
-        public function getMsg($id) {
+        public function sentMsg($id) {
             if(isset($_POST['chat'])) {
-                $data = [
-                    "body" => $_POST['chat'],
-                    "from_id" => $_SESSION['userId'],
-                    "to_id" => $id,
-                ];
-                
-                $this->user->db->insert("messages", $data);
-                $this->view->get_last_msg = $this->user->getMessages($_SESSION['userId'], $id);
-                echo json_encode(end($this->view->get_last_msg));
+                if($this->user->insertMessage($_POST['chat'], $id)) {
+                    $lastMsgDate = $this->user->getLastMsgDate();
+                    echo json_encode($lastMsgDate);
+                }
+                else {
+                    echo json_encode("Something went wrong, try again later");
+                }
             }
+        }
+
+        public function getMsg($id, $lastId) {
+            $get_last_msg = $this->user->getMessages($_SESSION['userId'], $id, $lastId);
+            echo json_encode($get_last_msg);
         }
 
     }
