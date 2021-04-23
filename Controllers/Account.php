@@ -71,13 +71,9 @@
 
         public function sentMsg($id) {
             if(isset($_POST['chat'])) {
-                if($this->user->insertMessage($_POST['chat'], $id)) {
-                    $lastMsgDate = $this->user->getLastMsgDate();
-                    echo json_encode($lastMsgDate);
-                }
-                else {
-                    echo json_encode("Something went wrong, try again later");
-                }
+                $this->user->insertMessage($_POST['chat'], $id); 
+                $lastMsgDate = $this->user->getLastMsgDate();
+                echo json_encode($lastMsgDate);
             }
         }
 

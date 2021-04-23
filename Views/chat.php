@@ -70,6 +70,9 @@
                         $("#clock").replaceWith("<small class = 'ml-4 mb-1'>" + response['date'].slice(11, -3) + "</small>");
                         $('#chatMsg').scrollTop($('#chatMsg')[0].scrollHeight);
                         lastMsgId++;
+                    },
+                    error: function() {
+                        alert('Error - Something went wrong, try again later');
                     }
                 });
                 $("#chatInput").val("");
