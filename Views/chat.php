@@ -87,7 +87,7 @@
                 success: function(response) {
                     if(response.length > 0) {
                         lastMsgId = response[response.length - 1]['id'];
-                        response.forEach((response) => {
+                        response.forEach(function(response) {
                             if(response['from_id'] != <?=$_SESSION['userId']?>) {
                                 $("#noMsg").replaceWith("");
                                 $("#chatMsg").append("<div><small class = 'mr-4 mt-3 float-right'>" + response['name'] + "</small></div>");
