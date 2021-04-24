@@ -2,41 +2,60 @@
     <?php header("Location: /account");?>
 <?php endif; ?>
 <div class = "container-fluid mt-5">
-    <div class="m-auto bg-light border border-secondary rounded mt-5" style = "width: 35%;">
-        <div class = "bg-secondary">
-            <h4 class = 'p-3 text-light m-0'><a href = "/account/friends" class = "fas fa-angle-double-left mr-3 text-light" style = "text-decoration: none;"></a><?=$this->userInfo['name']?></h4>
-        </div>
-        <div style = "height: 700px; overflow-y: auto;" class = "d-flex flex-column" id = "chatMsg"> 
-            <?php if(!empty($this->get_msg)): ?>
-                <?php foreach ($this->get_msg as $msg): ?>
-                    <?php if($msg["from_id"] == $_SESSION['userId']): ?>
-                        <small class = "ml-4 mt-3">You</small>
-                        <div class = "w-75">
-                            <h5 class = "ml-3 mb-0 float-left bg-primary p-3 text-light" style = "border-radius: 20px;"><?=$msg["body"]?></h5>
+    <div class="row d-flex justify-content-center">
+        <div class = "col-4-sm bg-light border border-secondary rounded mt-3" style = "width: 25%;">
+            <div style = "height: 700px; overflow-y: auto;">
+                <div class = "bg-secondary">
+                    <h4 class = 'p-3 text-light m-0 d-flex justify-content-center'>Friends</h4>
+                </div>
+                <div class = "ml-3 mr-3">
+                <?php
+                foreach ($this->friends as $friend): ?>
+                    <a href = "/account/chat/<?=$friend['id']?>" style = "text-decoration: none;">
+                        <div class = "p-3 text-dark mt-4" style = "border-radius: 10px; background-color: #DCDCDC;">
+                            <p class = "m-0" style = "font-size: 2.5vmin;"><?=$friend['name']?></p>
                         </div>
-                        <small class = "ml-4 mb-1"><?=substr($msg["date"], 11, -3)?></small>
-                    <?php else: ?>
-                        <div>
-                            <small class = "mr-4 mt-3 float-right"><?=$this->userInfo['name']?></small>
-                        </div>
-                        <div>
-                            <h5 class = "mr-3 mb-0 float-right bg-dark p-3 text-light" style = "border-radius: 20px;"><?=$msg["body"]?></h5>
-                        </div>
-                        <div>
-                            <small class = "mr-4 mb-1 float-right"><?=substr($msg["date"], 11, -3)?></small>
-                        </div>
-                    <?php endif; ?>
+                    </a>
                 <?php endforeach; ?>
-            <?php else: ?>
-                <?php $this->get_msg[0]['id'] = 0; ?>
-                <h6 class = "m-4 d-flex justify-content-center text-dark" id = "noMsg">Connect with your friend by sending a message</h6>
-            <?php endif; ?>
+                </div>
+            </div>
         </div>
-        <div class = "mt-auto border-top border-secondary rounded">
-            <div class="input-group">
-                <input type="text" autocomplete="off" class="form-control p-2" placeholder="Enter message..." id = "chatInput" name = "chat" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                <button class="btn btn-secondary btn-sm rounded-0 pl-3 pr-3" id = "button">Send<i class = "fa fa-paper-plane ml-2" aria-hidden="true"></i></button>
-            </div> 
+        <div class="col-4-sm bg-light border border-secondary rounded mt-3" style = "width: 45%;">
+            <div class = "bg-secondary">
+                <h4 class = 'p-3 text-light m-0'><?=$this->userInfo['name']?></h4>
+            </div>
+            <div style = "height: 700px; overflow-y: auto;" class = "d-flex flex-column" id = "chatMsg"> 
+                <?php if(!empty($this->get_msg)): ?>
+                    <?php foreach ($this->get_msg as $msg): ?>
+                        <?php if($msg["from_id"] == $_SESSION['userId']): ?>
+                            <small class = "ml-4 mt-3">You</small>
+                            <div class = "w-75">
+                                <h5 class = "ml-3 mb-0 float-left bg-primary p-3 text-light" style = "border-radius: 20px;"><?=$msg["body"]?></h5>
+                            </div>
+                            <small class = "ml-4 mb-1"><?=substr($msg["date"], 11, -3)?></small>
+                        <?php else: ?>
+                            <div>
+                                <small class = "mr-4 mt-3 float-right"><?=$this->userInfo['name']?></small>
+                            </div>
+                            <div>
+                                <h5 class = "mr-3 mb-0 float-right bg-dark p-3 text-light" style = "border-radius: 20px;"><?=$msg["body"]?></h5>
+                            </div>
+                            <div>
+                                <small class = "mr-4 mb-1 float-right"><?=substr($msg["date"], 11, -3)?></small>
+                            </div>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <?php $this->get_msg[0]['id'] = 0; ?>
+                    <h6 class = "m-4 d-flex justify-content-center text-dark" id = "noMsg">Connect with your friend by sending a message</h6>
+                <?php endif; ?>
+            </div>
+            <div class = "mt-auto border-top border-secondary">
+                <div class="input-group">
+                    <input type="text" autocomplete="off" class="form-control p-2" placeholder="Enter message..." id = "chatInput" name = "chat" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                    <button class="btn btn-secondary btn-sm rounded-0 pl-3 pr-3" id = "button">Send<i class = "fa fa-paper-plane ml-2" aria-hidden="true"></i></button>
+                </div> 
+            </div>
         </div>
     </div>
 </div>

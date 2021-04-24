@@ -64,6 +64,7 @@
         }
 
         public function chat($id) {
+            $this->view->friends = $this->user->getFriends($_SESSION["userId"]);
             $this->view->userInfo = $this->user->getUserInfo($id);
             $this->view->get_msg = $this->user->getMessages($_SESSION['userId'], $id);
             $this->view->render("chat");
