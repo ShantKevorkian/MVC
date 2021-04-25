@@ -52,7 +52,7 @@
         }
 
         public function getMessages($from, $to, $lastId = 0) {
-            return $this->db->select("SELECT from_id, to_id, body, m.id, u.name, date 
+            return $this->db->select("SELECT from_id, body, m.id, u.name, date 
                                         FROM messages as m 
                                         LEFT JOIN users as u ON m.from_id = u.id 
                                         WHERE ((from_id = $from AND to_id = $to) OR (from_id = $to AND to_id = $from))
