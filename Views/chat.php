@@ -61,6 +61,7 @@
 </div>
 <script>
     var lastMsgId = <?=end($this->get_msg)['id']?>;
+    
     $(function(){
         $("#chatInput").keyup(function(event) {
             if (event.keyCode === 13) {
@@ -88,7 +89,6 @@
                     success: function(response) {
                         $("#clock").replaceWith("<small class = 'ml-4 mb-1'>" + response['date'].slice(11, -3) + "</small>");
                         $('#chatMsg').scrollTop($('#chatMsg')[0].scrollHeight);
-                        lastMsgId++;
                     },
                     error: function() {
                         alert('Error - Something went wrong, try again later');
