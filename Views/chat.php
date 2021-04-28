@@ -22,6 +22,7 @@
                 <h4 class = 'p-3 text-light m-0'><?=$this->userInfo['name']?></h4>
             </div>
             <div style = "height: 700px; overflow-y: auto;" class = "d-flex flex-column" id = "chatMsg"> 
+            <?php $lastMsgId = 0; ?>
                 <?php if(!empty($this->get_msg)): ?>
                     <?php foreach ($this->get_msg as $msg): ?>
                         <?php if($msg["from_id"] == $_SESSION['userId']): ?>
@@ -41,9 +42,9 @@
                                 <small class = "mr-4 mb-1 float-right"><?=substr($msg["date"], 11, -3)?></small>
                             </div>
                         <?php endif; ?>
+                        <?php $lastMsgId = $msg['id'] ?>
                     <?php endforeach; ?>
                 <?php else: ?>
-                    <?php $this->get_msg[0]['id'] = 0; ?>
                     <h6 class = "m-4 d-flex justify-content-center text-dark" id = "noMsg">Connect with your friend by sending a message</h6>
                 <?php endif; ?>
             </div>
@@ -57,8 +58,8 @@
     </div>
 </div>
 <script>
-    var lastMsgId = <?=end($this->get_msg)['id']?>;
-    
+    var lastMsgId = <?=$lastMsgId?>;
+
     $(function(){
         $("#chatInput").keyup(function(event) {
             if (event.keyCode === 13) {
@@ -102,13 +103,13 @@
                 url: `/account/getMsg/<?=$this->userInfo['id']?>/${lastMsgId}`,
                 success: function(response) {
                     if(response.length > 0) {
-                        lastMsgId = response[response.length - 1]['id'];
-                        response.forEach(function(response) {
-                            if(response['from_id'] != <?=$_SESSION['userId']?>) {
+                        lastMsgId = response[response.length -1]['id'];
+                        response.forEach(function(msg) {
+                            if(msg['from_id'] != <?=$_SESSION['userId']?>) {
                                 $("#noMsg").replaceWith("");
-                                $("#chatMsg").append("<div><small class = 'mr-4 mt-3 float-right'>" + response['name'] + "</small></div>");
-                                $("#chatMsg").append("<div><h5 class = 'mr-3 mb-0 float-right bg-dark p-3 text-light' style = 'border-radius: 20px;'>" + response['body'] + "</h5></div>");
-                                $("#chatMsg").append("<div><small class = 'mr-4 mb-1 float-right'>" + response['date'].slice(11, -3) + "</small></div>");
+                                $("#chatMsg").append("<div><small class = 'mr-4 mt-3 float-right'>" + msg['name'] + "</small></div>");
+                                $("#chatMsg").append("<div><h5 class = 'mr-3 mb-0 float-right bg-dark p-3 text-light' style = 'border-radius: 20px;'>" + msg['body'] + "</h5></div>");
+                                $("#chatMsg").append("<div><small class = 'mr-4 mb-1 float-right'>" + msg['date'].slice(11, -3) + "</small></div>");
                                 $('#chatMsg').scrollTop($('#chatMsg')[0].scrollHeight);
                             }
                         });
