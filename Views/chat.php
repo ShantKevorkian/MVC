@@ -103,7 +103,7 @@
                 url: `/account/getMsg/<?=$this->userInfo['id']?>/${lastMsgId}`,
                 success: function(response) {
                     if(response.length > 0) {
-                        lastMsgId = response[response.length -1]['id'];
+                        lastMsgId = response[response.length - 1]['id'];
                         response.forEach(function(msg) {
                             if(msg['from_id'] != <?=$_SESSION['userId']?>) {
                                 $("#noMsg").replaceWith("");
