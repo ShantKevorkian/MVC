@@ -47,8 +47,8 @@
             return $this->db->insert("messages", $data);
         }
 
-        public function getLastMsgDate() {
-            return $this->db->select("SELECT date from messages ORDER BY id DESC LIMIT 1", false);
+        public function getLastMsgDate($userId) {
+            return $this->db->select("SELECT date from messages WHERE from_id = $userId ORDER BY id DESC LIMIT 1", false);
         }
 
         public function getMessages($from, $to, $lastId = 0) {

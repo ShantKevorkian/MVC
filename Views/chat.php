@@ -1,6 +1,3 @@
-<?php if($this->userInfo['id'] == $_SESSION['userId']): ?>
-    <?php header("Location: /account");?>
-<?php endif; ?>
 <div class = "container-fluid mt-5">
     <div class="row d-flex justify-content-center">
         <div class = "col-4-sm bg-light border border-secondary rounded mt-3" style = "width: 25%;">

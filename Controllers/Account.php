@@ -66,14 +66,19 @@
         public function chat($id) {
             $this->view->friends = $this->user->getFriends($_SESSION["userId"]);
             $this->view->userInfo = $this->user->getUserInfo($id);
+            if($this->view->userInfo['id'] == $_SESSION['userId']) {
+                header("Location: /account");
+            }
             $this->view->get_msg = $this->user->getMessages($_SESSION['userId'], $id);
             $this->view->render("chat");
         }
 
         public function sentMsg($id) {
             if(isset($_POST['chat'])) {
-                $this->user->insertMessage($_POST['chat'], $id); 
-                $lastMsgDate = $this->user->getLastMsgDate();
+                $lastMsgDate = "";
+                if($this->user->insertMessage($_POST['chat'], $id)) { 
+                    $lastMsgDate = $this->user->getLastMsgDate($_SESSION['userId']);
+                }
                 echo json_encode($lastMsgDate);
             }
         }
