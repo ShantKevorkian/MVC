@@ -98,7 +98,7 @@
 
         setInterval(function() {
             $.ajax({
-                type: "POST",
+                type: "GET",
                 dataType: "json",
                 url: `/account/getMsg/<?=$this->userInfo['id']?>/${lastMsgId}`,
                 success: function(response) {
